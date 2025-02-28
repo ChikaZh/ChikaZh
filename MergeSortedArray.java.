@@ -1,0 +1,38 @@
+public class MergeSortedArray {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        // Указатели на последние элементы массивов nums1 и nums2
+        int i = m - 1; // последний элемент в nums1 (в рамках первых m элементов)
+        int j = n - 1; // последний элемент в nums2
+        int k = m + n - 1; // индекс для последнего элемента в nums1 (куда будем вставлять)
+
+        // Пока есть элементы в обоих массивах
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[k--] = nums1[i--]; // Вставляем в конец nums1 элемент из nums1
+            } else {
+                nums1[k--] = nums2[j--]; // Вставляем в конец nums1 элемент из nums2
+            }
+        }
+
+        // Если в nums2 остались элементы, копируем их в nums1
+        while (j >= 0) {
+            nums1[k--] = nums2[j--];
+        }
+
+        // Если в nums1 остались элементы, они уже на своих местах, так что ничего делать не нужно
+    }
+
+    // Пример использования
+    public static void main(String[] args) {
+        MergeSortedArray msa = new MergeSortedArray();
+        
+        int[] nums1 = {1, 2, 3, 0, 0, 0};
+        int[] nums2 = {2, 5, 6};
+        msa.merge(nums1, 3, nums2, 3);
+        
+        // Выводим объединенный отсортированный массив
+        for (int num : nums1) {
+            System.out.print(num + " ");
+        }
+    }
+}
